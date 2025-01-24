@@ -1,6 +1,5 @@
 
 # PDF2TXT-OCR: Add OCR Text Layer to PDFs
-# PDF2TXT-OCR: Add OCR Text Layer to PDFs
 
 <img src="https://github.com/user-attachments/assets/b57a03dc-abee-463b-8411-bc078660860c" alt="PDF2TXT-OCR" width="500">
 
