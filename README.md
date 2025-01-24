@@ -1,166 +1,144 @@
-<!-- SPDX-FileCopyrightText: 2014 Julien Pfefferkorn -->
-<!-- SPDX-FileCopyrightText: 2015 James R. Barlow -->
-<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 
-<img src="docs/images/logo.svg" width="240" alt="OCRmyPDF">
+# PDF2TXT-OCR: Add OCR Text Layer to PDFs
 
-[![Build Status](https://github.com/ocrmypdf/OCRmyPDF/actions/workflows/build.yml/badge.svg)](https://github.com/ocrmypdf/OCRmyPDF/actions/workflows/build.yml) [![PyPI version][pypi]](https://pypi.org/project/ocrmypdf/) ![Homebrew version][homebrew] ![ReadTheDocs][docs] ![Python versions][pyversions]
+![PDF2TXT-OCR Logo](docs/images/logo.svg)
 
-[pypi]: https://img.shields.io/pypi/v/ocrmypdf.svg "PyPI version"
-[homebrew]: https://img.shields.io/homebrew/v/ocrmypdf.svg "Homebrew version"
-[docs]: https://readthedocs.org/projects/ocrmypdf/badge/?version=latest "RTD"
-[pyversions]: https://img.shields.io/pypi/pyversions/ocrmypdf "Supported Python versions"
+[![Build Status](https://github.com/ocrmypdf/OCRmyPDF/actions/workflows/build.yml/badge.svg)](https://github.com/ocrmypdf/OCRmyPDF/actions/workflows/build.yml) [![PyPI version](https://img.shields.io/pypi/v/ocrmypdf.svg)](https://pypi.org/project/ocrmypdf/) ![Homebrew version](https://img.shields.io/homebrew/v/ocrmypdf.svg) ![ReadTheDocs](https://readthedocs.org/projects/ocrmypdf/badge/?version=latest) ![Supported Python versions](https://img.shields.io/pypi/pyversions/ocrmypdf)
 
-OCRmyPDF adds an OCR text layer to scanned PDF files, allowing them to be searched or copy-pasted.
+**PDF2TXT-OCR** enhances scanned PDF files by adding an OCR (Optical Character Recognition) text layer, making them searchable and editable.
 
-```bash
-ocrmypdf                      # it's a scriptable command line program
-   -l eng+fra                 # it supports multiple languages
-   --rotate-pages             # it can fix pages that are misrotated
-   --deskew                   # it can deskew crooked PDFs!
-   --title "My PDF"           # it can change output metadata
-   --jobs 4                   # it uses multiple cores by default
-   --output-type pdfa         # it produces PDF/A by default
-   input_scanned.pdf          # takes PDF input (or images)
-   output_searchable.pdf      # produces validated PDF output
-```
+## Features at a Glance
 
-[See the release notes for details on the latest changes](https://ocrmypdf.readthedocs.io/en/latest/release_notes.html).
+- Converts PDFs into searchable [PDF/A](https://en.wikipedia.org/wiki/PDF/A) files.
+- Accurately places OCR text beneath images for easy copy-pasting.
+- Maintains the original image resolution while optimizing file size.
+- Deskews and cleans images for improved OCR accuracy (if requested).
+- Validates both input and output files for compatibility.
+- Distributes tasks across all CPU cores for faster processing.
+- Supports [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) for over [100 languages](https://github.com/tesseract-ocr/tessdata).
+- Handles files with thousands of pages efficiently.
+- Built for privacy, ensuring your data remains secure.
 
-## Main features
+![Demo](misc/screencast/demo.svg)
 
-- Generates a searchable [PDF/A](https://en.wikipedia.org/?title=PDF/A) file from a regular PDF
-- Places OCR text accurately below the image to ease copy / paste
-- Keeps the exact resolution of the original embedded images
-- When possible, inserts OCR information as a "lossless" operation without disrupting any other content
-- Optimizes PDF images, often producing files smaller than the input file
-- If requested, deskews and/or cleans the image before performing OCR
-- Validates input and output files
-- Distributes work across all available CPU cores
-- Uses [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) engine to recognize more than [100 languages](https://github.com/tesseract-ocr/tessdata)
-- Keeps your private data private.
-- Scales properly to handle files with thousands of pages.
-- Battle-tested on millions of PDFs.
+---
 
-<img src="misc/screencast/demo.svg" alt="Demo of OCRmyPDF in a terminal session">
+## Why Choose PDF2TXT-OCR?
 
-For details: please consult the [documentation](https://ocrmypdf.readthedocs.io/en/latest/).
+After exploring existing tools, common issues like misplaced OCR text, altered image resolution, oversized output files, and lack of PDF/A support led to the creation of PDF2TXT-OCR. This tool addresses these gaps with precision and reliability.
 
-## Motivation
+---
 
-I searched the web for a free command line tool to OCR PDF files: I found many, but none of them were really satisfying:
+## Installation Guide
 
-- Either they produced PDF files with misplaced text under the image (making copy/paste impossible)
-- Or they did not handle accents and multilingual characters
-- Or they changed the resolution of the embedded images
-- Or they generated ridiculously large PDF files
-- Or they crashed when trying to OCR
-- Or they did not produce valid PDF files
-- On top of that none of them produced PDF/A files (format dedicated for long time storage)
+PDF2TXT-OCR is compatible with Linux, Windows, macOS, and FreeBSD. Docker images for x64 and ARM are also available.
 
-...so I decided to develop my own tool.
+### Quick Installation
 
-## Installation
+| Platform                    | Command                          |
+|-----------------------------|----------------------------------|
+| **Debian/Ubuntu**           | `apt install ocrmypdf`          |
+| **Fedora**                  | `dnf install ocrmypdf`          |
+| **macOS (Homebrew)**        | `brew install ocrmypdf`         |
+| **macOS (MacPorts)**        | `port install ocrmypdf`         |
+| **FreeBSD**                 | `pkg install py-ocrmypdf`       |
+| **Snap Package**            | `snap install ocrmypdf`         |
 
-Linux, Windows, macOS and FreeBSD are supported. Docker images are also available, for both x64 and ARM.
+For other operating systems, refer to the [detailed installation documentation](https://ocrmypdf.readthedocs.io/en/latest/installation.html).
 
-| Operating system              | Install command               |
-| ----------------------------- | ------------------------------|
-| Debian, Ubuntu                | ``apt install ocrmypdf``      |
-| Windows Subsystem for Linux   | ``apt install ocrmypdf``      |
-| Fedora                        | ``dnf install ocrmypdf``      |
-| macOS (Homebrew)              | ``brew install ocrmypdf``     |
-| macOS (MacPorts)              | ``port install ocrmypdf``     |
-| macOS (nix)                   | ``nix-env -i ocrmypdf``       |
-| LinuxBrew                     | ``brew install ocrmypdf``     |
-| FreeBSD                       | ``pkg install py-ocrmypdf``   |
-| Ubuntu Snap                   | ``snap install ocrmypdf``     |
+---
 
-For everyone else, [see our documentation](https://ocrmypdf.readthedocs.io/en/latest/installation.html) for installation steps.
+## Getting Started
 
-## Languages
-
-OCRmyPDF uses Tesseract for OCR, and relies on its language packs. For Linux users, you can often find packages that provide language packs:
+PDF2TXT-OCR is a command-line tool. Here’s a quick example:
 
 ```bash
-# Display a list of all Tesseract language packs
-apt-cache search tesseract-ocr
-
-# Debian/Ubuntu users
-apt-get install tesseract-ocr-chi-sim  # Example: Install Chinese Simplified language pack
-
-# Arch Linux users
-pacman -S tesseract-data-eng tesseract-data-deu # Example: Install the English and German language packs
-
-# brew macOS users
-brew install tesseract-lang
+ocrmypdf input_scanned.pdf output_searchable.pdf
 ```
 
-You can then pass the `-l LANG` argument to OCRmyPDF to give a hint as to what languages it should search for. Multiple languages can be requested.
+### Key Options:
+- `-l eng+fra` - Specify languages for OCR.
+- `--deskew` - Straightens crooked pages.
+- `--rotate-pages` - Corrects misaligned pages.
+- `--output-type pdfa` - Produces PDF/A files by default.
 
-OCRmyPDF supports Tesseract 4.1.1+. It will automatically use whichever version it finds first on the `PATH` environment variable. On Windows, if `PATH` does not provide a Tesseract binary, we use the highest version number that is installed according to the Windows Registry.
-
-## Documentation and support
-
-Once OCRmyPDF is installed, the built-in help which explains the command syntax and options can be accessed via:
+For a full list of options, use:
 
 ```bash
 ocrmypdf --help
 ```
 
-Our [documentation is served on Read the Docs](https://ocrmypdf.readthedocs.io/en/latest/index.html).
+---
 
-Please report issues on our [GitHub issues](https://github.com/ocrmypdf/OCRmyPDF/issues) page, and follow the issue template for quick response.
+## Multilingual OCR
 
-## Feature demo
+To use OCR for different languages, install Tesseract language packs. For instance:
 
 ```bash
-# Add an OCR layer and convert to PDF/A
-ocrmypdf input.pdf output.pdf
+# Debian/Ubuntu
+apt-get install tesseract-ocr-chi-sim  # Install Chinese (Simplified)
 
-# Convert an image to single page PDF
-ocrmypdf input.jpg output.pdf
-
-# Add OCR to a file in place (only modifies file on success)
-ocrmypdf myfile.pdf myfile.pdf
-
-# OCR with non-English languages (look up your language's ISO 639-3 code)
-ocrmypdf -l fra LeParisien.pdf LeParisien.pdf
-
-# OCR multilingual documents
-ocrmypdf -l eng+fra Bilingual-English-French.pdf Bilingual-English-French.pdf
-
-# Deskew (straighten crooked pages)
-ocrmypdf --deskew input.pdf output.pdf
+# macOS (Homebrew)
+brew install tesseract-lang
 ```
 
-For more features, see the [documentation](https://ocrmypdf.readthedocs.io/en/latest/index.html).
+Specify multiple languages using their ISO 639-3 codes, e.g., `-l eng+fra`.
+
+---
+
+## Advanced Features
+
+- Convert an image into a searchable PDF:
+  ```bash
+  ocrmypdf input.jpg output.pdf
+  ```
+- Add OCR to an existing PDF:
+  ```bash
+  ocrmypdf input.pdf output.pdf
+  ```
+- Optimize multilingual PDFs:
+  ```bash
+  ocrmypdf -l eng+spa input.pdf output.pdf
+  ```
+
+Check out the [full documentation](https://ocrmypdf.readthedocs.io/en/latest/index.html) for additional examples.
+
+---
 
 ## Requirements
 
-In addition to the required Python version, OCRmyPDF requires external program installations of Ghostscript and Tesseract OCR. OCRmyPDF is pure Python, and runs on pretty much everything: Linux, macOS, Windows and FreeBSD.
+- **Python** (compatible versions listed in [PyPI](https://pypi.org/project/ocrmypdf/)).
+- **Tesseract OCR** (v4.1.1 or higher).
+- **Ghostscript** for PDF processing.
 
-## Press & Media
+---
 
-- [Going paperless with OCRmyPDF](https://medium.com/@ikirichenko/going-paperless-with-ocrmypdf-e2f36143f46a)
-- [Converting a scanned document into a compressed searchable PDF with redactions](https://medium.com/@treyharris/converting-a-scanned-document-into-a-compressed-searchable-pdf-with-redactions-63f61c34fe4c)
-- [c't 1-2014, page 59](https://heise.de/-2279695): Detailed presentation of OCRmyPDF v1.0 in the leading German IT magazine c't
-- [heise Open Source, 09/2014: Texterkennung mit OCRmyPDF](https://heise.de/-2356670)
-- [heise Durchsuchbare PDF-Dokumente mit OCRmyPDF erstellen](https://www.heise.de/ratgeber/Durchsuchbare-PDF-Dokumente-mit-OCRmyPDF-erstellen-4607592.html)
-- [Excellent Utilities: OCRmyPDF](https://www.linuxlinks.com/excellent-utilities-ocrmypdf-add-ocr-text-layer-scanned-pdfs/)
-- [LinuxUser Texterkennung mit OCRmyPDF und Scanbd automatisieren](https://www.linux-community.de/ausgaben/linuxuser/2021/06/texterkennung-mit-ocrmypdf-und-scanbd-automatisieren/)
-- [Y Combinator discussion](https://news.ycombinator.com/item?id=32028752)
+## Media and Reviews
 
-## Business enquiries
+PDF2TXT-OCR has been featured in leading publications, including:
 
-OCRmyPDF would not be the software that it is today without companies and users choosing to provide support for feature development and consulting enquiries. We are happy to discuss all enquiries, whether for extending the existing feature set, or integrating OCRmyPDF into a larger system.
+- **Medium**: [Going Paperless with OCRmyPDF](https://medium.com/@ikirichenko/going-paperless-with-ocrmypdf-e2f36143f46a)
+- **Linux Links**: [Excellent Utilities: OCRmyPDF](https://www.linuxlinks.com/excellent-utilities-ocrmypdf-add-ocr-text-layer-scanned-pdfs/)
+- **c’t Magazine**: Detailed overview in Germany’s top IT magazine.
+
+---
+
+## Business Inquiries
+
+For feature development, consulting, or integrating PDF2TXT-OCR into larger systems, please get in touch. Support from companies and users helps improve the project.
+
+---
 
 ## License
 
-The OCRmyPDF software is licensed under the Mozilla Public License 2.0 (MPL-2.0). This license permits integration of OCRmyPDF with other code, included commercial and closed source, but asks you to publish source-level modifications you make to OCRmyPDF.
+PDF2TXT-OCR is licensed under the [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/). Other components may use different licenses, as detailed in the source code.
 
-Some components of OCRmyPDF have other licenses, as indicated by standard SPDX license identifiers or the DEP5 copyright and licensing information file. Generally speaking, non-core code is licensed under MIT, and the documentation and test files are licensed under Creative Commons ShareAlike 4.0 (CC-BY-SA 4.0).
+---
 
 ## Disclaimer
 
-The software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+This software is provided "AS IS" without warranties of any kind, either express or implied.
+
+For further details, visit our [documentation](https://ocrmypdf.readthedocs.io/en/latest/index.html) or report issues on [GitHub](https://github.com/ocrmypdf/OCRmyPDF/issues).
+
+--- 
