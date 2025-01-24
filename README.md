@@ -1,10 +1,13 @@
 
 # PDF2TXT-OCR: Add OCR Text Layer to PDFs
-![1](https://github.com/user-attachments/assets/b57a03dc-abee-463b-8411-bc078660860c)
+# PDF2TXT-OCR: Add OCR Text Layer to PDFs
+
+<img src="https://github.com/user-attachments/assets/b57a03dc-abee-463b-8411-bc078660860c" alt="PDF2TXT-OCR" width="500">
 
 [![Build Status](https://github.com/ocrmypdf/OCRmyPDF/actions/workflows/build.yml/badge.svg)](https://github.com/ocrmypdf/OCRmyPDF/actions/workflows/build.yml) [![PyPI version](https://img.shields.io/pypi/v/ocrmypdf.svg)](https://pypi.org/project/ocrmypdf/) ![Homebrew version](https://img.shields.io/homebrew/v/ocrmypdf.svg) ![ReadTheDocs](https://readthedocs.org/projects/ocrmypdf/badge/?version=latest) ![Supported Python versions](https://img.shields.io/pypi/pyversions/ocrmypdf)
 
 **PDF2TXT-OCR** enhances scanned PDF files by adding an OCR (Optical Character Recognition) text layer, making them searchable and editable.
+
 
 ## Features at a Glance
 
