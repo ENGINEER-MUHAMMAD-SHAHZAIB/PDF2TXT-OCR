@@ -113,6 +113,36 @@ Check out the [full documentation](https://ocrmypdf.readthedocs.io/en/latest/ind
 - **Ghostscript** for PDF processing.
 
 ---
+## How to Use PDF2TXT-OCR
+
+1. **Install**: Make sure PDF2TXT-OCR is installed on your system.
+
+2. **Basic Command**:
+   ```bash
+   ocrmypdf input.pdf output.pdf
+   ```
+
+3. **Optional Features**:
+   - **Straighten pages**: `--deskew`
+   - **Fix alignment**: `--rotate-pages`
+   - **Set languages**: `-l eng+fra`
+   - **PDF/A output**: `--output-type pdfa`
+
+4. **Examples**:
+   - Convert image to PDF:  
+     ```bash
+     ocrmypdf input.jpg output.pdf
+     ```
+   - Add OCR to multilingual PDF:  
+     ```bash
+     ocrmypdf -l eng+spa input.pdf output.pdf
+     ```
+
+5. **Help**: For all options, run:
+   ```bash
+   ocrmypdf --help
+   ```
+---
 
 ## Media and Reviews
 
