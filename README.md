@@ -1,7 +1,7 @@
 
 # PDF2TXT-OCR: Add OCR Text Layer to PDFs
 
-<img src="https://github.com/user-attachments/assets/b57a03dc-abee-463b-8411-bc078660860c" alt="PDF2TXT-OCR" width="550">
+<img src="https://github.com/user-attachments/assets/b57a03dc-abee-463b-8411-bc078660860c" alt="PDF2TXT-OCR" width="530">
 
 [![Build Status](https://github.com/ocrmypdf/OCRmyPDF/actions/workflows/build.yml/badge.svg)](https://github.com/ocrmypdf/OCRmyPDF/actions/workflows/build.yml) [![PyPI version](https://img.shields.io/pypi/v/ocrmypdf.svg)](https://pypi.org/project/ocrmypdf/) ![Homebrew version](https://img.shields.io/homebrew/v/ocrmypdf.svg) ![ReadTheDocs](https://readthedocs.org/projects/ocrmypdf/badge/?version=latest) ![Supported Python versions](https://img.shields.io/pypi/pyversions/ocrmypdf)
 
