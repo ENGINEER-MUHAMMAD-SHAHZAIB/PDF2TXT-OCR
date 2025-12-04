@@ -22,7 +22,7 @@
 
 ![Demo](misc/screencast/demo.svg)
 
----
+----
 
 ## Why Choose PDF2TXT-OCR?
 
