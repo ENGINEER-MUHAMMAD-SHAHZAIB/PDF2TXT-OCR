@@ -47,7 +47,7 @@ PDF2TXT-OCR is compatible with Linux, Windows, macOS, and FreeBSD. Docker images
 
 For other operating systems, refer to the [detailed installation documentation](https://ocrmypdf.readthedocs.io/en/latest/installation.html).
 
----
+----
 
 ## Getting Started
 
